@@ -1,0 +1,26 @@
+CALL WRAP WHEN YOU GO TO ANOTHER PAGE IN OBJ_TEXT
+MULTIPLE PAGES
+
+https://www.youtube.com/watch?v=AhUDFm7Xo1M
+
+nuclear throne drunk generation
+hyper light drifter dash
+make sure player doesnt spawn in wall
+shader-based lighting system
+
+better procedural level generation
+	2. exit/start
+	
+	pillars
+	
+	(boss generates end portal)	
+	
+	
+enemys are your enemies and your powerups
+
+multiple heroes with different states
+
+camera follows person talking (dialogue)
+portraits of person talking
+pauses on comma/flag
+
