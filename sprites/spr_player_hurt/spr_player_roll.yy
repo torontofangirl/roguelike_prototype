@@ -72,7 +72,7 @@
     "eventStubScript": null,
     "parent": {"name":"spr_player_roll","path":"sprites/spr_player_roll/spr_player_roll.yy",},
     "resourceVersion": "1.3",
-    "name": "spr_player_roll",
+    "name": "",
     "tags": [],
     "resourceType": "GMSequence",
   },

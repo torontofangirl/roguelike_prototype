@@ -6,7 +6,7 @@
     "path": "folders/Scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "general_functions",
+  "name": "scr_gui_functions",
   "tags": [],
   "resourceType": "GMScript",
 }

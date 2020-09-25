@@ -1,12 +1,15 @@
-CALL WRAP WHEN YOU GO TO ANOTHER PAGE IN OBJ_TEXT
+--------------------------MVP--------------------------------
 MULTIPLE PAGES
 
-https://www.youtube.com/watch?v=AhUDFm7Xo1M
+https://www.youtube.com/watch?v=Lxy8Q67HgD4
 
-nuclear throne drunk generation
+Multiple classes, different state machine for each
+
+Lighting system
+
+-------------------------------------------------------------
+
 hyper light drifter dash
-make sure player doesnt spawn in wall
-shader-based lighting system
 
 better procedural level generation
 	2. exit/start

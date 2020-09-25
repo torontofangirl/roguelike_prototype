@@ -1,5 +1,3 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 function grid_place_meeting(_object, _grid) {
 
 	var _top_right = _grid[# (_object.bbox_right - 1) / TILE_SIZE, _object.bbox_top / TILE_SIZE] == VOID

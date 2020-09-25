@@ -6,7 +6,7 @@
     "path": "folders/Scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "gui_functions",
+  "name": "scr_player_animate_sprite",
   "tags": [],
   "resourceType": "GMScript",
 }

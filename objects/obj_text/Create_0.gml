@@ -13,9 +13,6 @@ target_x2 = WIN_W
 lerp_progress = 0 //percent
 text_progress = 0
 
-msg = "something's gone wrong"
 bg_index = 0
-
-responses = ["Test response 1 Test response 1 Test response 1 Test response 1", "Test response 2"]
 response_selected = 0
 

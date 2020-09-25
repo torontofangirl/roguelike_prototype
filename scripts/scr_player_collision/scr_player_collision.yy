@@ -6,7 +6,7 @@
     "path": "folders/Scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "player_animate_sprite",
+  "name": "scr_player_collision",
   "tags": [],
   "resourceType": "GMScript",
 }

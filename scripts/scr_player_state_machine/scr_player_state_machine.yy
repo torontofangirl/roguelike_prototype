@@ -6,7 +6,7 @@
     "path": "folders/Scripts.yy",
   },
   "resourceVersion": "1.0",
-  "name": "camera_functions",
+  "name": "scr_player_state_machine",
   "tags": [],
   "resourceType": "GMScript",
 }
