@@ -32,8 +32,8 @@ function create_room(_x_pos, _y_pos){
 			var _new_step_y = _top_left_y + _y
 			
 			//if inside border
-			if ((_new_step_x > 2) && (_new_step_x <= grid_w - 2)){
-				if ((_new_step_y > 2) && (_new_step_y <= grid_h - 2)){
+			if ((_new_step_x > 3) && (_new_step_x <= grid_w - 3)){
+				if ((_new_step_y > 3) && (_new_step_y <= grid_h - 3)){
 					grid[# _new_step_x, _new_step_y] = FLOOR
 				}
 			}
@@ -62,12 +62,12 @@ for (var _i = 0; _i < _walkers_amount; _i++){
 		_walkers[_i].y += _y_dir
 	
 		//prevent go outside grid
-		if (_walkers[_i].x < 2) || (_walkers[_i].x >= grid_w - 2){
+		if (_walkers[_i].x < 3) || (_walkers[_i].x >= grid_w - 3){
 			//jump walker back to previous square
 			_walkers[_i].x += -_x_dir * 2
 		}
 	
-		if (_walkers[_i].y < 2) || (_walkers[_i].y >= grid_h - 2){
+		if (_walkers[_i].y < 3) || (_walkers[_i].y >= grid_h - 3){
 			//jump walker back to previous square
 			_walkers[_i].y += -_y_dir * 2
 		}

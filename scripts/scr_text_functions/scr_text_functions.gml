@@ -28,6 +28,7 @@ function string_wrap(_str, _max_width){
 }
 
 function new_textbox(_msg, _opt_bg_index, _opt_responses){
+	if (0) return argument[0] //hacky way for no wrong argument error
 	var _obj
 	
 	if (instance_exists(obj_text)) _obj = obj_text_queued else _obj = obj_text

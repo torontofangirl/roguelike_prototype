@@ -3,7 +3,11 @@ MULTIPLE PAGES
 
 https://www.youtube.com/watch?v=Lxy8Q67HgD4
 
-Multiple classes, different state machine for each
+SNOWSTATE
+
+remember to add collisions to ds_grid
+
+outside room void, inside wall
 
 Lighting system
 

@@ -9,8 +9,7 @@
 
 //random generation
 #macro FLOOR -5
-#macro WALL -6
-#macro VOID -7
+#macro VOID -6
 
 #macro NORTH 1
 #macro WEST 2
