@@ -1,6 +1,3 @@
-// Script assets have changed for v2.3.0 see
-// https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
-
 function playerstate_free(){
 	hsp = lengthdir_x(input_magnitude * movesp, input_direction)
 	vsp = lengthdir_y(input_magnitude * movesp, input_direction)
@@ -23,7 +20,7 @@ function playerstate_free(){
 	player_animate_sprite()
 	
 
-	if (key_activate){
+	if (controls.interact){
 		//check for entity	
 		var _entity_radius = 30
 		activate = collision_rectangle(x - _entity_radius,
@@ -61,7 +58,7 @@ function playerstate_roll(){
 
 	move_distance_remaining = max(0, move_distance_remaining - rollsp)
 
-	var _collided = player_collision()
+	var _collided = move_and_collide()
 	#endregion
 
 	#region //update sprite
@@ -82,7 +79,5 @@ function playerstate_roll(){
 	}
 }
 
-function playerstate_locked(){
-	//most complicated state	
-}
+
 

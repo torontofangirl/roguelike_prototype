@@ -22,6 +22,10 @@
         {"properties":[
             {"propertyId":{"name":"entity_activate_args","path":"objects/par_entity/par_entity.yy",},"objectId":{"name":"par_entity","path":"objects/par_entity/par_entity.yy",},"value":"[\"test message\", 0, [\"1:Response A\", \"2:Response B\"]]","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
           ],"isDnd":false,"objectId":{"name":"obj_sign","path":"objects/obj_sign/obj_sign.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":512.0,"y":384.0,"resourceVersion":"1.0","name":"inst_5123D513","tags":[],"resourceType":"GMRInstance",},
+        {"properties":[
+            {"propertyId":{"name":"entity_activate_script","path":"objects/par_entity/par_entity.yy",},"objectId":{"name":"par_entity","path":"objects/par_entity/par_entity.yy",},"value":"new_textbox","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+            {"propertyId":{"name":"entity_activate_args","path":"objects/par_entity/par_entity.yy",},"objectId":{"name":"par_entity","path":"objects/par_entity/par_entity.yy",},"value":"[\"Hello there!\", 3]","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+          ],"isDnd":false,"objectId":{"name":"obj_npc","path":"objects/obj_npc/obj_npc.yy",},"inheritCode":false,"hasCreationCode":false,"colour":4294967295,"rotation":0.0,"scaleX":1.0,"scaleY":1.0,"imageIndex":0,"imageSpeed":1.0,"inheritedItemId":null,"frozen":false,"ignore":false,"inheritItemSettings":false,"x":544.0,"y":352.0,"resourceVersion":"1.0","name":"inst_1EFF05C9","tags":[],"resourceType":"GMRInstance",},
       ],"visible":true,"depth":200,"userdefinedDepth":false,"inheritLayerDepth":false,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"Entities","tags":[],"resourceType":"GMRInstanceLayer",},
     {"instances":[],"visible":true,"depth":300,"userdefinedDepth":false,"inheritLayerDepth":true,"inheritLayerSettings":false,"gridX":32,"gridY":32,"layers":[],"hierarchyFrozen":false,"resourceVersion":"1.0","name":"Level","tags":[],"resourceType":"GMRInstanceLayer",},
     {"tilesetId":{"name":"t_walls","path":"tilesets/t_walls/t_walls.yy",},"x":0,"y":0,"tiles":{"SerialiseWidth":40,"SerialiseHeight":23,"TileSerialiseData":[
@@ -81,6 +85,7 @@
   "inheritCode": true,
   "instanceCreationOrder": [
     {"name":"inst_5123D513","path":"rooms/rm_game/rm_game.yy",},
+    {"name":"inst_1EFF05C9","path":"rooms/rm_game/rm_game.yy",},
   ],
   "inheritCreationOrder": false,
   "sequenceId": null,

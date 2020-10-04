@@ -1,3 +1,5 @@
+npc breaks when playerstate has never become walk cuz no previous state
+
 --------------------------MVP--------------------------------
 MULTIPLE PAGES
 

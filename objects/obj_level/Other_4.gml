@@ -9,12 +9,12 @@ instance_create_layer(room_width / 2, room_height / 2, "Player", obj_player)
 
 for (var _i = 0; _i < _walkers_amount; _i++){
 	_walkers[_i] = {
-		x : grid_w / 2,
-		y : grid_h / 2,
-		dir : irandom(3),
-		steps : irandom_range(100, 150),
-		change_dir_chance : 0.33,
-		steps_since_turn : 0
+		x: grid_w / 2,
+		y: grid_h / 2,
+		dir: irandom(3),
+		steps: irandom_range(150, 200),
+		change_dir_chance: 0.33,
+		steps_since_turn: 0
 	}
 	randomize()
 }
