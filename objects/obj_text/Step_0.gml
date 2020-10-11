@@ -1,9 +1,7 @@
 lerp_progress += (1 - lerp_progress) / 50
 text_progress += text_speed
 
-var _control_up = keyboard_check_pressed(ord("W")) || keyboard_check_pressed(vk_up)
-var _control_down = keyboard_check_pressed(ord("S")) || keyboard_check_pressed(vk_down)
-response_selected += (_control_up - _control_down)
+response_selected += (obj_player.controls.select_up - obj_player.controls.select_down)
 
 //wrap responses
 var _max = array_length(responses) - 1

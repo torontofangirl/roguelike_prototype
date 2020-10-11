@@ -1,5 +1,5 @@
-#macro WIN_W 640
-#macro WIN_H 360
+#macro VIEW_W camera_get_view_width(view_camera[0])
+#macro VIEW_H camera_get_view_height(view_camera[0])
 
 #macro FPS 60
 #macro TILE_SIZE 32

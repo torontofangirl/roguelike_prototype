@@ -1,3 +1,7 @@
+grid_w = room_width / TILE_SIZE
+grid_h = room_height / TILE_SIZE
+grid = ds_grid_create(grid_w, grid_h)
+
 var _wall_map = layer_tilemap_get_id(layer_get_id("Walls"))
 
 ds_grid_set_region(grid, 0, 0, grid_w, grid_h, VOID)

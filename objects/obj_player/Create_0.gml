@@ -3,7 +3,6 @@ image_speed = 0
 hsp = 0
 vsp = 0
 walksp = 2
-dashsp = 4
 dash_distance = 128
 
 spr_walk = spr_player_walk
@@ -64,6 +63,20 @@ move_and_collide = function(){
 	}
 
 	return _collision
+}
+
+animate = function() {
+	var _total_frames = sprite_get_number(sprite_index) / 4
+	image_index = local_frame + (CARDINAL_DIR * _total_frames)
+
+	local_frame += sprite_get_speed(sprite_index) / FPS
+
+	//if animation would loop
+	if (local_frame >= _total_frames){
+		animation_end = true
+		local_frame -= _total_frames
+	}
+	else animation_end = false
 }
 
 #region statemachine example
@@ -140,7 +153,7 @@ state = new StateMachine("idle",
 			else state_switch("idle")
 			
 			if (_old_sprite != sprite_index) local_frame = 0
-			player_animate_sprite()
+			animate()
 			
 			if (controls.interact && !instance_exists(obj_text) && (get_current_state(id) != "locked")) check_entity()
 			
