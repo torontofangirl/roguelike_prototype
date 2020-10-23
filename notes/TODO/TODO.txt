@@ -1,18 +1,14 @@
-npc breaks when playerstate has never become walk cuz no previous state
+remember to add collisions to ds_grid
 
 --------------------------MVP--------------------------------
 MULTIPLE PAGES
 
 https://www.youtube.com/watch?v=Lxy8Q67HgD4
 
-SNOWSTATE
+shooting and rolling
 
-remember to add collisions to ds_grid
-
-outside room void, inside wall
-
-Lighting system
-
+"smart grid": grid stores struct containing health and type
+struct should be made using constructor
 -------------------------------------------------------------
 
 hyper light drifter dash

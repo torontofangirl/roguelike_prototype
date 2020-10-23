@@ -1,14 +1,14 @@
 if (!global.game_paused){
 	controls = {
-		left: keyboard_check(vk_left),
-		right: keyboard_check(vk_right),
-		up: keyboard_check(vk_up),
-		down: keyboard_check(vk_down),
-		interact: keyboard_check_pressed(ord("X")),
-		dash: keyboard_check_pressed(ord("Z")),
+		left: keyboard_check(ord("A")),
+		right: keyboard_check(ord("D")),
+		up: keyboard_check(ord("W")),
+		down: keyboard_check(ord("S")),
+		interact: keyboard_check_pressed(ord("E")),
+		dash: keyboard_check_pressed(vk_space),
 		
-		select_up: keyboard_check_pressed(vk_up),
-		select_down: keyboard_check_pressed(vk_down)
+		select_up: keyboard_check_pressed(vk_up) || keyboard_check_pressed(ord("W")),
+		select_down: keyboard_check_pressed(vk_down) || keyboard_check_pressed(ord("S"))
 	}
 
 	input_direction = point_direction(0, 0, controls.right - controls.left, controls.down - controls.up)

@@ -1,3 +1,5 @@
+global.game_paused = false
+
 function new_textbox(_msg, _opt_bg_index, _opt_responses){
 	if (0) return argument[0] //hacky way for no wrong argument error
 	var _obj
@@ -46,4 +48,14 @@ function dialogue_responses(_response){
 	}
 }
 
+function screen_shake(_magnitude, _frames){
+	with (obj_camera){
+		if (_magnitude > shake_remain){
+			shake_magnitude = _magnitude
+			shake_remain = shake_magnitude
+			shake_length = _frames
+		}
+	}
+}
+	
 
