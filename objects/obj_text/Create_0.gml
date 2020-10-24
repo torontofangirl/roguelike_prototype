@@ -17,3 +17,4 @@ bg_index = 0
 response_selected = 0
 
 text_speed = 0.75
+

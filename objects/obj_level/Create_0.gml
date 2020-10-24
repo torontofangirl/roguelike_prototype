@@ -1,18 +1,49 @@
-function grid_place_meeting(_object, _grid){
-	var _top_right = _grid[# (_object.bbox_right - 1) / TILE_SIZE, _object.bbox_top / TILE_SIZE] == VOID
-	var _top_left = _grid[# _object.bbox_left / TILE_SIZE, _object.bbox_top / TILE_SIZE] == VOID
-	var _bottom_right = _grid[# (_object.bbox_right - 1) / TILE_SIZE, (_object.bbox_bottom - 1) / TILE_SIZE] == VOID
-	var _bottom_left = _grid[# _object.bbox_left / TILE_SIZE, (_object.bbox_bottom - 1) / TILE_SIZE] == VOID
+///@func grid_place_meeting(object, grid)
+///@param {real} object			id of the object to check
+///@param {real} grid			ds_grid to check collision with
+///@returns {bool} collision	whether there is a collision or not
+grid_place_meeting = function(_object, _grid){
+	var _top_right = _grid[# (_object.bbox_right - 1) / TILE_SIZE, _object.bbox_top / TILE_SIZE].tile_type == VOID
+	var _top_left = _grid[# _object.bbox_left / TILE_SIZE, _object.bbox_top / TILE_SIZE].tile_type == VOID
+	var _bottom_right = _grid[# (_object.bbox_right - 1) / TILE_SIZE, (_object.bbox_bottom - 1) / TILE_SIZE].tile_type == VOID
+	var _bottom_left = _grid[# _object.bbox_left / TILE_SIZE, (_object.bbox_bottom - 1) / TILE_SIZE].tile_type == VOID
 
 	return _top_right || _top_left || _bottom_right || _bottom_left
 }
 
-//function wall_tile(_type, _hp) constructor{
-//	type = _type
-//	hp = _hp
+///@func create_room(x_pos, y_pos)
+///@param {real} x_pos			x_pos of the point to create the room around
+///@param {real} y_pos			y_pos of the point to create the room around
+///@returns N/A
+create_room = function(_x_pos, _y_pos){
+	var _x_size = irandom_range(2, 4)
+	var _y_size = irandom_range(2, 4)
 	
+	var _top_left_x = round(_x_pos - (_x_size / 2))
+	var _top_left_y = round(_y_pos - (_y_size / 2))
 	
-//}
+	for (var _y = 0; _y < _y_size; _y++){
+		for (var _x = 0; _x < _x_size; _x++){
+			var _new_step_x = _top_left_x + _x
+			var _new_step_y = _top_left_y + _y
+			
+			//if inside border
+			if ((_new_step_x > 3) && (_new_step_x <= grid_w - 3)){
+				if ((_new_step_y > 3) && (_new_step_y <= grid_h - 3)){
+					grid[# _new_step_x, _new_step_y].tile_type = FLOOR
+				}
+			}
+		}
+	}
+}
+
+///@func WallTile(type, hp)
+///@param {real} type			type of tile wall/floor
+///@param {real} hp				hp of the tile
+WallTile = function(_type, _hp) constructor{
+	tile_type = _type
+	tile_hp = _hp
+}
 
 grid_w = room_width / TILE_SIZE
 grid_h = room_height / TILE_SIZE
@@ -20,7 +51,11 @@ grid = ds_grid_create(grid_w, grid_h)
 
 var _wall_map = layer_tilemap_get_id(layer_get_id("Walls"))
 
-ds_grid_set_region(grid, 0, 0, grid_w, grid_h, VOID)
+for (var _y = 0; _y < grid_h; _y++){
+	for (var _x = 0; _x < grid_w; _x++){
+		grid[# _x, _y] = new WallTile(VOID, 5)
+	}
+}
 
 var _walkers = []
 var _walkers_amount = irandom_range(1, 3)
@@ -37,32 +72,10 @@ for (var _i = 0; _i < _walkers_amount; _i++){
 	randomize()
 }
 
-function create_room(_x_pos, _y_pos){
-	var _x_size = irandom_range(2, 4)
-	var _y_size = irandom_range(2, 4)
-	
-	var _top_left_x = round(_x_pos - (_x_size / 2))
-	var _top_left_y = round(_y_pos - (_y_size / 2))
-	
-	for (var _y = 0; _y < _y_size; _y++){
-		for (var _x = 0; _x < _x_size; _x++){
-			var _new_step_x = _top_left_x + _x
-			var _new_step_y = _top_left_y + _y
-			
-			//if inside border
-			if ((_new_step_x > 3) && (_new_step_x <= grid_w - 3)){
-				if ((_new_step_y > 3) && (_new_step_y <= grid_h - 3)){
-					grid[# _new_step_x, _new_step_y] = FLOOR
-				}
-			}
-		}
-	}
-}
-
 for (var _i = 0; _i < _walkers_amount; _i++){
 	create_room(_walkers[_i].x, _walkers[_i].y)
 	repeat (_walkers[_i].steps){
-		grid[# _walkers[_i].x, _walkers[_i].y] = FLOOR
+		grid[# _walkers[_i].x, _walkers[_i].y].tile_type = FLOOR
 		
 		_walkers[_i].steps_since_turn++
 	
@@ -97,17 +110,17 @@ for (var _i = 0; _i < _walkers_amount; _i++){
 #region //remove single tiles
 for (var _y = 1; _y < grid_h - 1; _y++){
 	for (var _x = 1; _x < grid_w - 1; _x++){
-		if (grid[# _x, _y] != FLOOR){
-			var _north_tile = grid[# _x, _y - 1] == VOID //returns true if void else return false
-			var _west_tile = grid[# _x - 1, _y] == VOID
-			var _east_tile = grid[# _x + 1, _y] == VOID
-			var _south_tile = grid[# _x, _y + 1] == VOID
+		if (grid[# _x, _y].tile_type != FLOOR){
+			var _north_tile = grid[# _x, _y - 1].tile_type == VOID //returns true if void else return false
+			var _west_tile = grid[# _x - 1, _y].tile_type == VOID
+			var _east_tile = grid[# _x + 1, _y].tile_type == VOID
+			var _south_tile = grid[# _x, _y + 1].tile_type == VOID
 			
 			//+1 because tiles are not 0-indexed
 			var _tile_index = NORTH * _north_tile + WEST * _west_tile + EAST * _east_tile + SOUTH * _south_tile + 1		
 			
 			if (_tile_index == 1){ //if no tiles beside me (read the line above)
-				grid[# _x, _y] = FLOOR
+				grid[# _x, _y].tile_type = FLOOR
 			}
 		}
 	}
@@ -117,11 +130,11 @@ for (var _y = 1; _y < grid_h - 1; _y++){
 #region //tile level
 for (var _y = 1; _y < grid_h - 1; _y++){
 	for (var _x = 1; _x < grid_w - 1; _x++){
-		if (grid[# _x, _y] != FLOOR){
-			var _north_tile = grid[# _x, _y - 1] == VOID //returns true if void else return false
-			var _west_tile = grid[# _x - 1, _y] == VOID
-			var _east_tile = grid[# _x + 1, _y] == VOID
-			var _south_tile = grid[# _x, _y + 1] == VOID
+		if (grid[# _x, _y].tile_type != FLOOR){
+			var _north_tile = grid[# _x, _y - 1].tile_type == VOID //returns true if void else return false
+			var _west_tile = grid[# _x - 1, _y].tile_type == VOID
+			var _east_tile = grid[# _x + 1, _y].tile_type == VOID
+			var _south_tile = grid[# _x, _y + 1].tile_type == VOID
 			
 			//+1 because tiles are not 0-indexed
 			var _tile_index = NORTH * _north_tile + WEST * _west_tile + EAST * _east_tile + SOUTH * _south_tile + 1

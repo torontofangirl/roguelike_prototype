@@ -12,11 +12,15 @@ spr_dash = spr_player_dash
 //image index, but for our direction
 local_frame = 0
 
+///@func check_entity()
+///@returns N/A
 check_entity = function(){
 	var _inst = instance_place(x, y, par_entity)
 	with (_inst) state_switch("interact")
 }
 
+///@func move_and_collide()
+///@returns N/A
 move_and_collide = function(){
 	var _collision = false
 
@@ -65,6 +69,8 @@ move_and_collide = function(){
 	return _collision
 }
 
+///@func animate()
+///@returns N/A
 animate = function() {
 	var _total_frames = sprite_get_number(sprite_index) / 4
 	image_index = local_frame + (CARDINAL_DIR * _total_frames)

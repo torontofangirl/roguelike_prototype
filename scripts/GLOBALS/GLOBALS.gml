@@ -1,5 +1,10 @@
 global.game_paused = false
 
+///@func new_textbox(message, opt_bg_index, [opt_responses])
+///@param {string} message			the message to display
+///@param {real} opt_bg_index		image_index of bg sprite
+///@param {string} [opt_responses]	array of responses
+///@returns N/A
 function new_textbox(_msg, _opt_bg_index, _opt_responses){
 	if (0) return argument[0] //hacky way for no wrong argument error
 	var _obj
@@ -36,6 +41,9 @@ function new_textbox(_msg, _opt_bg_index, _opt_responses){
 	}
 }
 
+///@func dialogue_responses(response)
+///@param {real} response			index of response to select
+///@returns N/A
 function dialogue_responses(_response){
 	//GIANT SWITCH STATEMENT HOORAY
 	switch (_response){
@@ -44,18 +52,10 @@ function dialogue_responses(_response){
 		case 2: new_textbox("you gave response b! any further response?", 0, ["3:Yes", "0:No"]) break
 		case 3: new_textbox("thanks for giving responses", 0) break
 		
-		default: show_debug_message("dialogue_responses switch statement: something's gone wrong") break
+		default: show_error("dialogue_responses switch statement: something's gone wrong", false) break
 	}
 }
 
-function screen_shake(_magnitude, _frames){
-	with (obj_camera){
-		if (_magnitude > shake_remain){
-			shake_magnitude = _magnitude
-			shake_remain = shake_magnitude
-			shake_length = _frames
-		}
-	}
-}
+
 	
 

@@ -1,5 +1,10 @@
 surf = -1
 
+///@func create_light(x, y, flicker)
+///@param {real} x			x coordinate to create light source
+///@param {real} y			y coordinate to create light source
+///@param {bool} flicker	whether or not to create flicker effect
+///@returns N/A
 create_light = function(_x, _y, _flicker){
 	//flicker: bool
 	//run in draw event
@@ -29,3 +34,5 @@ create_light = function(_x, _y, _flicker){
 		surface_reset_target()
 	}
 }
+
+
