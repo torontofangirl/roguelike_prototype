@@ -6,8 +6,7 @@ surf = -1
 ///@param {bool} flicker	whether or not to create flicker effect
 ///@returns N/A
 create_light = function(_x, _y, _flicker){
-	//flicker: bool
-	//run in draw event
+	//run in draw gui event
 	x = _x
 	y = _y
 	flicker = _flicker

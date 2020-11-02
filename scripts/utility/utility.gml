@@ -1,3 +1,7 @@
+///@func script_execute_array(function, params)
+///@param {real} function			The function to execute
+///@param [params]					Array of params
+///@returns N/A
 function script_execute_array(_script, _args){
 	switch (array_length(_args)) {
  
@@ -31,6 +35,9 @@ function approach(_val1, _val2, _inc) {
 	return (_val1 + clamp(_val2-_val1, -_inc, _inc));
 }
 
+///@func chance(percent)
+///@param {real} percent			percentage on scale 0-1
+///@returns {bool} chance			i can't think of what to write here
 function chance(_percent){
 	//chance(0.7) returns true 70% of time
 	return _percent > random(1)
@@ -43,6 +50,12 @@ function animation_end() {
 	return (image_index + image_speed*sprite_get_speed(sprite_index)/(sprite_get_speed_type(sprite_index)==spritespeed_framespergameframe? 1 : game_get_speed(gamespeed_fps)) >= image_number);	
 }
 
+///@func draw_set_text(colour, font, halign, valign)
+///@param {real}			colour
+///@param {real}			font
+///@param {real}			halign
+///@param {real}			valign
+///@returns					N/A
 function draw_set_text(_colour, _font, _halign, _valign){
 	draw_set_colour(_colour)
 	draw_set_font(_font)
@@ -50,8 +63,11 @@ function draw_set_text(_colour, _font, _halign, _valign){
 	draw_set_valign(_valign)
 }
 
+///@func string_wrap(string, max_width)
+///@param {string}			string to be wrapped
+///@param {real}			string WIDTH (not length) to wrap after
+///@returns {string}		wrapped string
 function string_wrap(_str, _max_width){
-	//inserts \n
 	var _str_len = string_length(_str)
 	var _last_space = 1
 	
@@ -72,15 +88,14 @@ function string_wrap(_str, _max_width){
 	return _str
 }
 
+///@func nine_slice_box_stretched(sprite, x1, y1, x2, y2, index)
+///@arg sprite
+///@arg x1 left
+///@arg y1 top
+///@arg x2 rigt
+///@arg y2 bottom
+///@arg index image index
 function nine_slice_box_stretched(sprite, x1, y1, x2, y2, index){
-	///@desc NineSliceBoxStretched(sprite, x1, y1, x2, y2, index)
-	///@arg sprite
-	///@arg x1 left
-	///@arg y1 top
-	///@arg x2 rigt
-	///@arg y2 bottom
-	///@arg index image index
-	
 	var _size = sprite_get_width(argument0) / 3;
 	var _x1 = argument1;
 	var _y1 = argument2;
