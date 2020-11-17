@@ -1,5 +1,10 @@
-#macro VIEW_W camera_get_view_width(view_camera[0])
-#macro VIEW_H camera_get_view_height(view_camera[0])
+#macro CAM view_camera[0]
+#macro CAM_X camera_get_view_x(CAM)
+#macro CAM_Y camera_get_view_y(CAM)
+#macro CAM_W camera_get_view_width(CAM)
+#macro CAM_H camera_get_view_height(CAM)
+#macro CAM_CX (camera_get_view_x(CAM) + camera_get_view_width(CAM) / 2)
+#macro CAM_CY (camera_get_view_y(CAM) + camera_get_view_height(CAM) / 2)
 
 #macro FPS 60
 #macro TILE_SIZE 32

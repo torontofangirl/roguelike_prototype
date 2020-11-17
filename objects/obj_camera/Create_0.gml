@@ -6,6 +6,9 @@ view_h_half = camera_get_view_height(cam) * 0.5
 xTo = xstart
 yTo = ystart
 
+x = follow.x
+y = follow.y
+
 //screenshake
 shake_length = 0
 shake_magnitude = 0

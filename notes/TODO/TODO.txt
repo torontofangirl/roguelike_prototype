@@ -1,5 +1,30 @@
-remember to add collisions to ds_grid
+A roguelike set in space where you were delivered deep into space to die for
+your crimes. You must defeat enemies in order to find a spaceship rumoured to
+have been built centuries ago. Along the way, you'll receive help from
+spelunky-style shopkeepers.
 
+Once you find the spaceship, 
+
+If you die, you spawn on a brand-new planet 
+
+Nuclear Throne meets spelunky meets enter the gungeon
+
+Nuclear throne elements - Procedural generation, fully destructible terrain
+
+Spelunky elements - Shops, treasure (found on ground or killed by enemies)
+There should also be lots of traps
+
+Enter the gungeon elements - unique guns, (bosses have own room with bossbar)
+
+8 directional shooting, similar to circuit breakers
+
+CLASS ABILITIES:
+	ROLL
+	PARRY (tap within certain time frame to deflect bullets)
+	(Parry time frame can be increased later)
+	PHASE OUT (nothing can interact with you and vice versa)
+	(teleport a short distance after getting upgrade later)
+	
 --------------------------MVP--------------------------------
 MULTIPLE PAGES
 
@@ -7,11 +32,14 @@ https://www.youtube.com/watch?v=Lxy8Q67HgD4
 
 shooting and rolling
 
-"smart grid": grid stores struct containing health and type
-struct should be made using constructor
--------------------------------------------------------------
+destrutable terrain (BOMBS)
+special abilities (get the parenting system working)
 
-hyper light drifter dash
+lighting should actually hide enemies like among us(draw to different layer)?
+-------------------------------------------------------------
+SPROUT dash
+
+puzzles
 
 better procedural level generation
 	2. exit/start

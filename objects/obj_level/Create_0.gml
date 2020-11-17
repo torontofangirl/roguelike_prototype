@@ -1,24 +1,16 @@
-///@func grid_place_meeting(object, grid)
-///@param {real} object			id of the object to check
-///@param {real} grid			ds_grid to check collision with
-///@returns {bool} collision	whether there is a collision or not
-grid_place_meeting = function(_object, _grid){
-	var _top_right = _grid[# (_object.bbox_right - 1) / TILE_SIZE, _object.bbox_top / TILE_SIZE].tile_type == VOID
-	var _top_left = _grid[# _object.bbox_left / TILE_SIZE, _object.bbox_top / TILE_SIZE].tile_type == VOID
-	var _bottom_right = _grid[# (_object.bbox_right - 1) / TILE_SIZE, (_object.bbox_bottom - 1) / TILE_SIZE].tile_type == VOID
-	var _bottom_left = _grid[# _object.bbox_left / TILE_SIZE, (_object.bbox_bottom - 1) / TILE_SIZE].tile_type == VOID
+grid_w = room_width / TILE_SIZE
+grid_h = room_height / TILE_SIZE
+grid = ds_grid_create(grid_w, grid_h)
 
-	return _top_right || _top_left || _bottom_right || _bottom_left
-}
+wall_map = layer_tilemap_get_id(layer_get_id("Walls_Tile"))
 
-///@func create_room(x_pos, y_pos)
-///@param {real} x_pos			x_pos of the point to create the room around
-///@param {real} y_pos			y_pos of the point to create the room around
+///@func create_room(x_pos, y_pos, x_size, y_size)
+///@param {real} x_pos			x_pos of the point to create the room around (GRID COORDS!)
+///@param {real} y_pos			y_pos of the point to create the room around (GRID COORDS!)
+///@param {real} x_pos			x_size of the room
+///@param {real} y_pos			y_size of the room
 ///@returns N/A
-create_room = function(_x_pos, _y_pos){
-	var _x_size = irandom_range(2, 4)
-	var _y_size = irandom_range(2, 4)
-	
+create_room = function(_x_pos, _y_pos, _x_size, _y_size){	
 	var _top_left_x = round(_x_pos - (_x_size / 2))
 	var _top_left_y = round(_y_pos - (_y_size / 2))
 	
@@ -30,7 +22,7 @@ create_room = function(_x_pos, _y_pos){
 			//if inside border
 			if ((_new_step_x > 3) && (_new_step_x <= grid_w - 3)){
 				if ((_new_step_y > 3) && (_new_step_y <= grid_h - 3)){
-					grid[# _new_step_x, _new_step_y].tile_type = FLOOR
+					grid[# _new_step_x, _new_step_y].type = FLOOR
 				}
 			}
 		}
@@ -40,20 +32,13 @@ create_room = function(_x_pos, _y_pos){
 ///@func WallTile(type, hp)
 ///@param {real} type			type of tile wall/floor
 ///@param {real} hp				hp of the tile
-WallTile = function(_type, _hp) constructor{
-	tile_type = _type
-	tile_hp = _hp
+WallTile = function(_type) constructor{
+	type = _type
 }
-
-grid_w = room_width / TILE_SIZE
-grid_h = room_height / TILE_SIZE
-grid = ds_grid_create(grid_w, grid_h)
-
-var _wall_map = layer_tilemap_get_id(layer_get_id("Walls"))
 
 for (var _y = 0; _y < grid_h; _y++){
 	for (var _x = 0; _x < grid_w; _x++){
-		grid[# _x, _y] = new WallTile(VOID, 5)
+		grid[# _x, _y] = new WallTile(VOID, 120)
 	}
 }
 
@@ -66,23 +51,23 @@ for (var _i = 0; _i < _walkers_amount; _i++){
 		y: grid_h / 2,
 		dir: irandom(3),
 		steps: irandom_range(150, 200),
-		change_dir_chance: 0.33,
+		change_dir_chance: 0.4,
 		steps_since_turn: 0
 	}
 	randomize()
 }
 
 for (var _i = 0; _i < _walkers_amount; _i++){
-	create_room(_walkers[_i].x, _walkers[_i].y)
+	create_room(_walkers[_i].x, _walkers[_i].y, 3, 3)
 	repeat (_walkers[_i].steps){
-		grid[# _walkers[_i].x, _walkers[_i].y].tile_type = FLOOR
+		grid[# _walkers[_i].x, _walkers[_i].y].type = FLOOR
 		
 		_walkers[_i].steps_since_turn++
 	
 		//random dir
 		if (chance(_walkers[_i].change_dir_chance) && (_walkers[_i].steps_since_turn >= 6)){
 			_walkers[_i].dir = irandom(3)
-			create_room(_walkers[_i].x, _walkers[_i].y)
+			create_room(_walkers[_i].x, _walkers[_i].y, 2, 2)
 		}
 	
 		//move walker
@@ -110,41 +95,24 @@ for (var _i = 0; _i < _walkers_amount; _i++){
 #region //remove single tiles
 for (var _y = 1; _y < grid_h - 1; _y++){
 	for (var _x = 1; _x < grid_w - 1; _x++){
-		if (grid[# _x, _y].tile_type != FLOOR){
-			var _north_tile = grid[# _x, _y - 1].tile_type == VOID //returns true if void else return false
-			var _west_tile = grid[# _x - 1, _y].tile_type == VOID
-			var _east_tile = grid[# _x + 1, _y].tile_type == VOID
-			var _south_tile = grid[# _x, _y + 1].tile_type == VOID
+		if (grid[# _x, _y].type != FLOOR){
+			var _north_tile = grid[# _x, _y - 1].type == VOID //returns true if void else return false
+			var _west_tile = grid[# _x - 1, _y].type == VOID
+			var _east_tile = grid[# _x + 1, _y].type == VOID
+			var _south_tile = grid[# _x, _y + 1].type == VOID
 			
 			//+1 because tiles are not 0-indexed
 			var _tile_index = NORTH * _north_tile + WEST * _west_tile + EAST * _east_tile + SOUTH * _south_tile + 1		
 			
 			if (_tile_index == 1){ //if no tiles beside me (read the line above)
-				grid[# _x, _y].tile_type = FLOOR
+				grid[# _x, _y].type = FLOOR
 			}
 		}
 	}
 }
 #endregion
 
-#region //tile level
-for (var _y = 1; _y < grid_h - 1; _y++){
-	for (var _x = 1; _x < grid_w - 1; _x++){
-		if (grid[# _x, _y].tile_type != FLOOR){
-			var _north_tile = grid[# _x, _y - 1].tile_type == VOID //returns true if void else return false
-			var _west_tile = grid[# _x - 1, _y].tile_type == VOID
-			var _east_tile = grid[# _x + 1, _y].tile_type == VOID
-			var _south_tile = grid[# _x, _y + 1].tile_type == VOID
-			
-			//+1 because tiles are not 0-indexed
-			var _tile_index = NORTH * _north_tile + WEST * _west_tile + EAST * _east_tile + SOUTH * _south_tile + 1
-			
-			tilemap_set(_wall_map, _tile_index, _x, _y)
 
-		}
-	}
-}
-#endregion
 
 
 

@@ -6,11 +6,8 @@ if (instance_exists(follow)){
 	yTo = follow.y
 }
 
-/*x = lerp(x, xTo, 0.15);
-y = lerp(y, yTo, 0.15);*/
-
-x += xTo - x
-y += yTo - y
+x = approach(x, xTo, (xTo - x) / 10)
+y = approach(y, yTo, (yTo - y) / 10)
 
 //clamp camera in room
 x = clamp(x, view_w_half + TILE_SIZE, room_width - view_w_half - TILE_SIZE)

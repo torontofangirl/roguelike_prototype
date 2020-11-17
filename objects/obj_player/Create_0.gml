@@ -3,11 +3,12 @@ image_speed = 0
 hsp = 0
 vsp = 0
 walksp = 2
-dash_distance = 128
+rollsp = 3
+roll_distance = 96
 
 spr_walk = spr_player_walk
 spr_idle = spr_player
-spr_dash = spr_player_dash
+spr_roll = spr_player_roll
 
 //image index, but for our direction
 local_frame = 0
@@ -28,7 +29,7 @@ move_and_collide = function(){
 
 	// Horizontal collisions
 	if hsp > 0 {
-		if (obj_level.grid_place_meeting(id, obj_level.grid)) {
+		if (grid_meeting(id, obj_level.grid)) {
 			_collision = true
 			x = bbox_right&~(TILE_SIZE-1);
 			x -= bbox_right-x;
@@ -36,7 +37,7 @@ move_and_collide = function(){
 		}
 	} else if hsp < 0 {
 		// Left collisions
-		if (obj_level.grid_place_meeting(id, obj_level.grid)) {
+		if (grid_meeting(id, obj_level.grid)) {
 			_collision = true
 			x = bbox_left&~(TILE_SIZE-1);
 			x += TILE_SIZE+x-bbox_left;
@@ -50,7 +51,7 @@ move_and_collide = function(){
 	// Vertical collisions
 	if vsp > 0 {
 		// Bottom collisions
-		if (obj_level.grid_place_meeting(id, obj_level.grid)) {
+		if (grid_meeting(id, obj_level.grid)) {
 			_collision = true
 			y = bbox_bottom&~(TILE_SIZE-1);
 			y -= bbox_bottom-y;
@@ -58,7 +59,7 @@ move_and_collide = function(){
 		}
 	} else if vsp < 0 {
 		// Top collisions
-		if (obj_level.grid_place_meeting(id, obj_level.grid)) {
+		if (grid_meeting(id, obj_level.grid)) {
 			_collision = true
 			y = bbox_top&~(TILE_SIZE-1);
 			y += TILE_SIZE+y-bbox_top;
@@ -126,19 +127,13 @@ state = new StateMachine("idle",
 	"idle", {
 		enter: function() {
 			sprite_index = spr_idle
-			hsp = 0
-			vsp = 0
 		},
-		
 		step: function() {
 			if (input_magnitude != 0) state_switch("walk")
 			
-			if (controls.interact && !instance_exists(obj_text) && (get_current_state(id) != "locked")) check_entity()
+			if (controls.interact && !instance_exists(obj_text) && get_current_state(id) != "locked") check_entity()
 			
-			if (controls.dash && (get_current_state(id) != "locked")){
-				state_switch("dash")
-				move_distance_remaining = dash_distance
-			}
+			if (controls.dash && get_current_state(id) != "locked") state_switch("roll")
 		}
 	},
 
@@ -161,12 +156,7 @@ state = new StateMachine("idle",
 			if (_old_sprite != sprite_index) local_frame = 0
 			animate()
 			
-			if (controls.interact && !instance_exists(obj_text) && (get_current_state(id) != "locked")) check_entity()
-			
-			if (controls.dash && (get_current_state(id) != "locked")){
-				state_switch("dash")
-				move_distance_remaining = dash_distance
-			}
+			if (controls.dash && get_current_state(id) != "locked") state_switch("roll")
 		}
 	},
 	
@@ -175,8 +165,25 @@ state = new StateMachine("idle",
 		//so complicated	
 	},
 	
-	"dash", {
-		
+	"roll", {
+		enter: function(){
+			roll_distance_remaining = roll_distance
+			sprite_index = spr_roll
+		},
+		step: function(){
+			hsp = lengthdir_x(rollsp, direction)
+			vsp = lengthdir_y(rollsp, direction)
+			
+			roll_distance_remaining = max(0, roll_distance_remaining - rollsp)
+			var _collided = move_and_collide()
+			
+			var _total_frames = sprite_get_number(sprite_index) / 4
+			image_index = (CARDINAL_DIR * _total_frames) + min(((1 - (roll_distance_remaining / roll_distance)) * _total_frames), _total_frames - 1)
+			
+			if (roll_distance_remaining <= 0){
+				state_switch("idle")
+			}
+		}
 	}
 )
 
