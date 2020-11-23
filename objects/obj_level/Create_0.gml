@@ -1,11 +1,18 @@
 grid_w = room_width / TILE_SIZE
 grid_h = room_height / TILE_SIZE
 grid = ds_grid_create(grid_w, grid_h)
+rooms = ds_list_create() //ds_list containing structs with room info
 
 wall_map = layer_tilemap_get_id(layer_get_id("Walls_Tile"))
 
 var _walkers = []
-var _walkers_amount = irandom_range(1, 3)
+var _walkers_amount = 2
+
+///@func WallTile(type)
+///@param {real} type			type of tile wall/floor
+WallTile = function(_type) constructor{
+	type = _type
+}
 
 ///@func create_room(x_pos, y_pos, x_size, y_size)
 ///@param {real} x_pos			x_pos of the point to create the room around (GRID COORDS!)
@@ -13,7 +20,9 @@ var _walkers_amount = irandom_range(1, 3)
 ///@param {real} x_pos			x_size of the room
 ///@param {real} y_pos			y_size of the room
 ///@returns N/A
-create_room = function(_x_pos, _y_pos, _x_size, _y_size){	
+create_room = function(_x_pos, _y_pos, _x_size, _y_size){
+	ds_list_add(rooms, {x_pos: _x_pos, y_pos: _y_pos, x_size: _x_size, y_size: _y_size})
+	
 	var _top_left_x = round(_x_pos - (_x_size / 2))
 	var _top_left_y = round(_y_pos - (_y_size / 2))
 	
@@ -30,13 +39,26 @@ create_room = function(_x_pos, _y_pos, _x_size, _y_size){
 			}
 		}
 	}
+	
+	static amount = 0
+	amount++
+	show_debug_message(amount)
 }
 
-///@func WallTile(type, hp)
-///@param {real} type			type of tile wall/floor
-///@param {real} hp				hp of the tile
-WallTile = function(_type) constructor{
-	type = _type
+///@func get_end_room()
+///@returns
+///Gets room furthest away from beginning location
+get_end_room = function(){
+	var _end_room = rooms[| 1]
+	
+	for (var _i = 0; _i < ds_list_size(rooms); _i++){
+		var _room = rooms[| _i]
+		if (point_distance(grid_w / 2, grid_h / 2, _room.x_pos, _room.y_pos) > point_distance(grid_w / 2, grid_h / 2, _end_room.x_pos, _end_room.y_pos)){
+			_end_room = _room
+		}
+	}
+	
+	return _end_room
 }
 
 for (var _y = 0; _y < grid_h; _y++){
@@ -50,7 +72,7 @@ for (var _i = 0; _i < _walkers_amount; _i++){
 		x: grid_w / 2,
 		y: grid_h / 2,
 		dir: irandom(3),
-		steps: irandom_range(150, 200),
+		steps: irandom_range(75, 100),
 		change_dir_chance: 0.4,
 		steps_since_turn: 0
 	}
@@ -59,15 +81,16 @@ for (var _i = 0; _i < _walkers_amount; _i++){
 
 for (var _i = 0; _i < _walkers_amount; _i++){
 	create_room(_walkers[_i].x, _walkers[_i].y, 3, 3)
+
 	repeat (_walkers[_i].steps){
 		grid[# _walkers[_i].x, _walkers[_i].y].type = FLOOR
 		
 		_walkers[_i].steps_since_turn++
 	
 		//random dir
-		if (chance(_walkers[_i].change_dir_chance) && (_walkers[_i].steps_since_turn >= 6)){
+		if (chance(_walkers[_i].change_dir_chance) && (_walkers[_i].steps_since_turn >= 4) && chance(0.4)){
 			_walkers[_i].dir = irandom(3)
-			create_room(_walkers[_i].x, _walkers[_i].y, 2, 2)
+			create_room(_walkers[_i].x, _walkers[_i].y, 3, 3)
 		}
 	
 		//move walker
@@ -112,6 +135,7 @@ for (var _y = 1; _y < grid_h - 1; _y++){
 }
 #endregion
 
+instance_create_layer(get_end_room().x_pos * TILE_SIZE, get_end_room().y_pos * TILE_SIZE, "Entities", obj_exit_door)
 
 
 
