@@ -4,6 +4,9 @@ grid = ds_grid_create(grid_w, grid_h)
 
 wall_map = layer_tilemap_get_id(layer_get_id("Walls_Tile"))
 
+var _walkers = []
+var _walkers_amount = irandom_range(1, 3)
+
 ///@func create_room(x_pos, y_pos, x_size, y_size)
 ///@param {real} x_pos			x_pos of the point to create the room around (GRID COORDS!)
 ///@param {real} y_pos			y_pos of the point to create the room around (GRID COORDS!)
@@ -41,9 +44,6 @@ for (var _y = 0; _y < grid_h; _y++){
 		grid[# _x, _y] = new WallTile(VOID, 120)
 	}
 }
-
-var _walkers = []
-var _walkers_amount = irandom_range(1, 3)
 
 for (var _i = 0; _i < _walkers_amount; _i++){
 	_walkers[_i] = {

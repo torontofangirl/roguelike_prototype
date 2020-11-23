@@ -7,6 +7,3 @@ draw_set_alpha(1)
 	
 surface_reset_target()
 draw_surface(surf, CAM_X, CAM_Y)
-
-
-

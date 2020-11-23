@@ -1,9 +1,11 @@
-A roguelike set in space where you were delivered deep into space to die for
-your crimes. You must defeat enemies in order to find a spaceship rumoured to
-have been built centuries ago. Along the way, you'll receive help from
-spelunky-style shopkeepers.
+A roguelike set in space where you discover yourself in an abondoned spaceship. You need to figure out how the ship works and get it online again, all
+while being attacked by aliens. To power the ship back on, you must get to the control room by fighting waves of enemies.
 
-Once you find the spaceship, 
+A roguelike set in space where you were delivered deep into space to die for your crimes. You must defeat enemies in order to find a spaceship
+rumoured to have been built centuries ago. Along the way, you'll receive help from spelunky-style shopkeepers.
+
+Once you find the spaceship, you realize that it has been overrun and downed by aliens. You must now fix the ship d
+
 
 If you die, you spawn on a brand-new planet 
 
@@ -11,8 +13,7 @@ Nuclear Throne meets spelunky meets enter the gungeon
 
 Nuclear throne elements - Procedural generation, fully destructible terrain
 
-Spelunky elements - Shops, treasure (found on ground or killed by enemies)
-There should also be lots of traps
+Spelunky elements - Shops, treasure (found on ground or killed by enemies) There should also be lots of traps (risk / reward)
 
 Enter the gungeon elements - unique guns, (bosses have own room with bossbar)
 
@@ -56,4 +57,3 @@ multiple heroes with different states
 camera follows person talking (dialogue)
 portraits of person talking
 pauses on comma/flag
-
