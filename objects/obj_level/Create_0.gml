@@ -14,6 +14,21 @@ WallTile = function(_type) constructor{
 	type = _type
 }
 
+///@func Walker(x, y, steps, change_dir_chance)
+///@param {real} x					x to spawn walker at GRID COORDS
+///@param {real} y					y to spawn walker at GRID COORDS
+///@param {real} steps				steps the walker should take
+///@param {real} change_dir_chance	chance to change direction
+Walker = function(_x, _y, _steps, _change_dir_chance) constructor{
+	x = _x
+	y = _y
+	steps = _steps
+	change_dir_chance = _change_dir_chance
+	
+	dir = irandom(3)
+	steps_since_turn = 0
+}
+
 ///@func create_room(x_pos, y_pos, x_size, y_size)
 ///@param {real} x_pos			x_pos of the point to create the room around (GRID COORDS!)
 ///@param {real} y_pos			y_pos of the point to create the room around (GRID COORDS!)
@@ -46,10 +61,10 @@ create_room = function(_x_pos, _y_pos, _x_size, _y_size){
 }
 
 ///@func get_end_room()
-///@returns
+///@returns {struct} end_room			room furthest away from walker spawn
 ///Gets room furthest away from beginning location
 get_end_room = function(){
-	var _end_room = rooms[| 1]
+	var _end_room = rooms[| infinity]
 	
 	for (var _i = 0; _i < ds_list_size(rooms); _i++){
 		var _room = rooms[| _i]
@@ -67,19 +82,9 @@ for (var _y = 0; _y < grid_h; _y++){
 	}
 }
 
+#region generate level
 for (var _i = 0; _i < _walkers_amount; _i++){
-	_walkers[_i] = {
-		x: grid_w / 2,
-		y: grid_h / 2,
-		dir: irandom(3),
-		steps: irandom_range(75, 100),
-		change_dir_chance: 0.4,
-		steps_since_turn: 0
-	}
-	randomize()
-}
-
-for (var _i = 0; _i < _walkers_amount; _i++){
+	_walkers[_i] = new Walker(grid_w / 2, grid_h / 2, irandom_range(100, 150), 0.4)
 	create_room(_walkers[_i].x, _walkers[_i].y, 3, 3)
 
 	repeat (_walkers[_i].steps){
@@ -113,9 +118,9 @@ for (var _i = 0; _i < _walkers_amount; _i++){
 	}
 	randomize()
 }
+#endregion
 
-
-#region //remove single tiles
+#region remove single tiles
 for (var _y = 1; _y < grid_h - 1; _y++){
 	for (var _x = 1; _x < grid_w - 1; _x++){
 		if (grid[# _x, _y].type != FLOOR){
