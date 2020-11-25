@@ -1,6 +1,6 @@
 grid_w = room_width / TILE_SIZE
 grid_h = room_height / TILE_SIZE
-grid = ds_grid_create(grid_w, grid_h)
+level_data = array_create(grid_w) //not required to create just for clarity
 rooms = ds_list_create() //ds_list containing structs with room info
 
 wall_map = layer_tilemap_get_id(layer_get_id("Walls_Tile"))
@@ -8,9 +8,9 @@ wall_map = layer_tilemap_get_id(layer_get_id("Walls_Tile"))
 var _walkers = []
 var _walkers_amount = 2
 
-///@func WallTile(type)
+///@func TileData(type)
 ///@param {real} type			type of tile wall/floor
-WallTile = function(_type) constructor{
+TileData = function(_type) constructor{
 	type = _type
 }
 
@@ -49,7 +49,7 @@ create_room = function(_x_pos, _y_pos, _x_size, _y_size){
 			//if inside border
 			if ((_new_step_x > 3) && (_new_step_x <= grid_w - 3)){
 				if ((_new_step_y > 3) && (_new_step_y <= grid_h - 3)){
-					grid[# _new_step_x, _new_step_y].type = FLOOR
+					level_data[_new_step_x][_new_step_y].type = FLOOR
 				}
 			}
 		}
@@ -75,12 +75,13 @@ get_end_room = function(){
 	
 	return _end_room
 }
-
+	
 for (var _y = 0; _y < grid_h; _y++){
 	for (var _x = 0; _x < grid_w; _x++){
-		grid[# _x, _y] = new WallTile(VOID, 120)
+		level_data[_x][_y] = new TileData(VOID)
 	}
 }
+show_debug_message(level_data)
 
 #region generate level
 for (var _i = 0; _i < _walkers_amount; _i++){
@@ -88,7 +89,7 @@ for (var _i = 0; _i < _walkers_amount; _i++){
 	create_room(_walkers[_i].x, _walkers[_i].y, 3, 3)
 
 	repeat (_walkers[_i].steps){
-		grid[# _walkers[_i].x, _walkers[_i].y].type = FLOOR
+		level_data[_walkers[_i].x][_walkers[_i].y].type = FLOOR
 		
 		_walkers[_i].steps_since_turn++
 	
@@ -123,17 +124,17 @@ for (var _i = 0; _i < _walkers_amount; _i++){
 #region remove single tiles
 for (var _y = 1; _y < grid_h - 1; _y++){
 	for (var _x = 1; _x < grid_w - 1; _x++){
-		if (grid[# _x, _y].type != FLOOR){
-			var _north_tile = grid[# _x, _y - 1].type == VOID //returns true if void else return false
-			var _west_tile = grid[# _x - 1, _y].type == VOID
-			var _east_tile = grid[# _x + 1, _y].type == VOID
-			var _south_tile = grid[# _x, _y + 1].type == VOID
+		if (level_data[_x][_y].type != FLOOR){
+			var _north_tile = level_data[_x][_y - 1].type == VOID //returns true if void else return false
+			var _west_tile = level_data[_x - 1][_y].type == VOID
+			var _east_tile = level_data[_x + 1][_y].type == VOID
+			var _south_tile = level_data[_x][_y + 1].type == VOID
 			
 			//+1 because tiles are not 0-indexed
 			var _tile_index = NORTH * _north_tile + WEST * _west_tile + EAST * _east_tile + SOUTH * _south_tile + 1		
 			
 			if (_tile_index == 1){ //if no tiles beside me (read the line above)
-				grid[# _x, _y].type = FLOOR
+				level_data[_x][_y].type = FLOOR
 			}
 		}
 	}

@@ -29,7 +29,7 @@ move_and_collide = function(){
 
 	// Horizontal collisions
 	if hsp > 0 {
-		if (grid_meeting(id, obj_level.grid)) {
+		if (grid_meeting(id, obj_level.level_data)) {
 			_collision = true
 			x = bbox_right&~(TILE_SIZE-1);
 			x -= bbox_right-x;
@@ -37,7 +37,7 @@ move_and_collide = function(){
 		}
 	} else if hsp < 0 {
 		// Left collisions
-		if (grid_meeting(id, obj_level.grid)) {
+		if (grid_meeting(id, obj_level.level_data)) {
 			_collision = true
 			x = bbox_left&~(TILE_SIZE-1);
 			x += TILE_SIZE+x-bbox_left;
@@ -51,7 +51,7 @@ move_and_collide = function(){
 	// Vertical collisions
 	if vsp > 0 {
 		// Bottom collisions
-		if (grid_meeting(id, obj_level.grid)) {
+		if (grid_meeting(id, obj_level.level_data)) {
 			_collision = true
 			y = bbox_bottom&~(TILE_SIZE-1);
 			y -= bbox_bottom-y;
@@ -59,7 +59,7 @@ move_and_collide = function(){
 		}
 	} else if vsp < 0 {
 		// Top collisions
-		if (grid_meeting(id, obj_level.grid)) {
+		if (grid_meeting(id, obj_level.level_data)) {
 			_collision = true
 			y = bbox_top&~(TILE_SIZE-1);
 			y += TILE_SIZE+y-bbox_top;

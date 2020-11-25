@@ -5,10 +5,10 @@ global.game_paused = false
 ///@param {real} grid			ds_grid to check collision with
 ///@returns {bool} collision	whether there is a collision or not
 function grid_meeting(_object, _grid){
-	var _top_right = _grid[# (_object.bbox_right - 1) / TILE_SIZE, _object.bbox_top / TILE_SIZE].type == VOID
-	var _top_left = _grid[# _object.bbox_left / TILE_SIZE, _object.bbox_top / TILE_SIZE].type == VOID
-	var _bottom_right = _grid[# (_object.bbox_right - 1) / TILE_SIZE, (_object.bbox_bottom - 1) / TILE_SIZE].type == VOID
-	var _bottom_left = _grid[# _object.bbox_left / TILE_SIZE, (_object.bbox_bottom - 1) / TILE_SIZE].type == VOID
+	var _top_right = _grid[(_object.bbox_right - 1) / TILE_SIZE][_object.bbox_top / TILE_SIZE].type == VOID
+	var _top_left = _grid[_object.bbox_left / TILE_SIZE][_object.bbox_top / TILE_SIZE].type == VOID
+	var _bottom_right = _grid[(_object.bbox_right - 1) / TILE_SIZE][(_object.bbox_bottom - 1) / TILE_SIZE].type == VOID
+	var _bottom_left = _grid[_object.bbox_left / TILE_SIZE][(_object.bbox_bottom - 1) / TILE_SIZE].type == VOID
 
 	return _top_right || _top_left || _bottom_right || _bottom_left
 }
