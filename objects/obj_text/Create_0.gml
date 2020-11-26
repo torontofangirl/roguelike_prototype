@@ -1,14 +1,14 @@
 box_buffer_from_top = 140
 text_buffer_from_top = 16
-text_max_width = VIEW_W - 40
+text_max_width = CAM_W - 40
 
-x1 = VIEW_W / 2
-y1 = VIEW_H - box_buffer_from_top
-x2 = VIEW_W / 2
-y2 = VIEW_H
+x1 = CAM_W / 2
+y1 = CAM_H - box_buffer_from_top
+x2 = CAM_W / 2
+y2 = CAM_H
 
 target_x1 = 0
-target_x2 = VIEW_W
+target_x2 = CAM_W
 
 lerp_progress = 0 //percent
 text_progress = 0

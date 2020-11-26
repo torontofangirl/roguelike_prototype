@@ -18,7 +18,7 @@ state = new StateMachine("idle",
 			image_index = 0
 			
 			if (entity_activate_script != -1){
-				script_execute_array(entity_activate_script, entity_activate_args)
+				script_execute_ext(entity_activate_script, entity_activate_args)
 
 				if (entity_npc){
 					direction = point_direction(x, y, obj_player.x, obj_player.y)
