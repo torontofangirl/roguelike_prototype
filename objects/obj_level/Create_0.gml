@@ -1,6 +1,5 @@
 grid_w = room_width / TILE_SIZE
 grid_h = room_height / TILE_SIZE
-level_data = array_create(grid_w) //not required to create just for clarity
 rooms = ds_list_create() //ds_list containing structs with room info
 
 wall_map = layer_tilemap_get_id(layer_get_id("Walls_Tile"))
@@ -32,8 +31,8 @@ Walker = function(_x, _y, _steps, _change_dir_chance) constructor{
 ///@func create_room(x_pos, y_pos, x_size, y_size)
 ///@param {real} x_pos			x_pos of the point to create the room around (GRID COORDS!)
 ///@param {real} y_pos			y_pos of the point to create the room around (GRID COORDS!)
-///@param {real} x_pos			x_size of the room
-///@param {real} y_pos			y_size of the room
+///@param {real} x_size			x_size of the room
+///@param {real} y_size			y_size of the room
 ///@returns N/A
 create_room = function(_x_pos, _y_pos, _x_size, _y_size){
 	ds_list_add(rooms, {x_pos: _x_pos, y_pos: _y_pos, x_size: _x_size, y_size: _y_size})
@@ -47,8 +46,8 @@ create_room = function(_x_pos, _y_pos, _x_size, _y_size){
 			var _new_step_y = _top_left_y + _y
 			
 			//if inside border
-			if ((_new_step_x > 3) && (_new_step_x <= grid_w - 3)){
-				if ((_new_step_y > 3) && (_new_step_y <= grid_h - 3)){
+			if ((_new_step_x >= 2) && (_new_step_x < grid_w - 2)){
+				if ((_new_step_y >= 2) && (_new_step_y < grid_h - 2)){
 					level_data[_new_step_x][_new_step_y].type = FLOOR
 				}
 			}
@@ -81,7 +80,6 @@ for (var _y = 0; _y < grid_h; _y++){
 		level_data[_x][_y] = new TileData(VOID)
 	}
 }
-show_debug_message(level_data)
 
 #region generate level
 for (var _i = 0; _i < _walkers_amount; _i++){
@@ -94,9 +92,9 @@ for (var _i = 0; _i < _walkers_amount; _i++){
 		_walkers[_i].steps_since_turn++
 	
 		//random dir
-		if (chance(_walkers[_i].change_dir_chance) && (_walkers[_i].steps_since_turn >= 4) && chance(0.4)){
+		if (chance(_walkers[_i].change_dir_chance) && (_walkers[_i].steps_since_turn >= 4)){
 			_walkers[_i].dir = irandom(3)
-			create_room(_walkers[_i].x, _walkers[_i].y, 3, 3)
+			if (chance(0.4)) create_room(_walkers[_i].x, _walkers[_i].y, irandom_range(2, 4), irandom_range(2, 4))
 		}
 	
 		//move walker
@@ -107,12 +105,12 @@ for (var _i = 0; _i < _walkers_amount; _i++){
 		_walkers[_i].y += _y_dir
 	
 		//prevent go outside grid
-		if (_walkers[_i].x < 3) || (_walkers[_i].x >= grid_w - 3){
+		if (_walkers[_i].x >= grid_w - 2) || (_walkers[_i].x < 2){
 			//jump walker back to previous square
 			_walkers[_i].x += -_x_dir * 2
 		}
 	
-		if (_walkers[_i].y < 3) || (_walkers[_i].y >= grid_h - 3){
+		if (_walkers[_i].y >= grid_h - 2) || (_walkers[_i].y < 2){
 			//jump walker back to previous square
 			_walkers[_i].y += -_y_dir * 2
 		}

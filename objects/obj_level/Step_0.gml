@@ -1,4 +1,7 @@
+if (keyboard_check(ord("C"))) create_room(obj_player.x div TILE_SIZE, obj_player.y div TILE_SIZE, 10, 10)
+
 #region tile level
+// 1 buffer on each side so that we can check tiles "outside" the grid
 for (var _y = 1; _y < grid_h - 1; _y++){
 	for (var _x = 1; _x < grid_w - 1; _x++){
 		if (level_data[_x][_y].type != FLOOR){

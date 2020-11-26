@@ -1,28 +1,22 @@
-///@func script_execute_array(function, params)
-///@param {real} function			The function to execute
-///@param [params]					Array of params
-///@returns N/A
-function script_execute_array(_script, _args){
-	switch (array_length(_args)) {
- 
-		case 1: return script_execute(_script, _args[0]);
- 
-		case 2: return script_execute(_script, _args[0], _args[1]);
- 
-		case 3: return script_execute(_script, _args[0], _args[1], _args[2]);
- 
-		case 4: return script_execute(_script, _args[0], _args[1], _args[2], _args[3]);
- 
-		case 5: return script_execute(_script, _args[0], _args[1], _args[2], _args[3], _args[4]);
- 
-		case 6: return script_execute(_script, _args[0], _args[1], _args[2], _args[3], _args[4], _args[5]);
- 
-		case 7: return script_execute(_script, _args[0], _args[1], _args[2], _args[3], _args[4], _args[5], _args[6]);
- 
-		case 8: return script_execute(_script, _args[0], _args[1], _args[2], _args[3], _args[4], _args[5], _args[6], _args[7]);
- 
-		default: show_error("script_execute_array: argument count not supported!", false);
-	}
+/// @func array_create_nd(size1, size2,...)
+function array_create_nd() {
+    if (argument_count == 0) return 0;
+    
+    var _array = array_create(argument[0]),
+        _args  = array_create(argument_count-1),
+        _i;
+        
+    _i = 0; repeat(argument_count-1) {
+        _args[@ _i] = argument[_i+1];
+        ++_i;
+    }
+    
+    _i = 0; repeat(argument[0]) {
+        _array[@ _i] = script_execute_ext(array_create_nd, _args);
+        ++_i;
+    }
+    
+    return _array;
 }
 
 /// @func		approach(val1, val2, amount)
