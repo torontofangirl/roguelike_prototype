@@ -3,6 +3,3 @@ if (!global.game_paused){
 	depth = -bbox_bottom
 	state.step()	
 }
-
-
-

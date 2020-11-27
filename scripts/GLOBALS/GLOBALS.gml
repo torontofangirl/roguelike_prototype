@@ -59,33 +59,13 @@ function fourlimit_set_colors(colA, colB, colC, colD, random_) {
 ///@param {real} opt_bg_index		image_index of bg sprite
 ///@param {string} [opt_responses]	array of responses
 ///@returns N/A
-function new_textbox(_msg, _bg_index, _opt_responses){
-	if (0) return argument[0] //hacky way for no wrong argument error
-	var _obj
-	
-	if (instance_exists(obj_text)) _obj = obj_text_queued else _obj = obj_text
-	with (instance_create_layer(0, 0, "Managers", _obj)){
+function new_textbox(_msg, _bg_index){
+	var _tbox = instance_create_layer(0, 0, "Managers", obj_text)
+	with (_tbox){
 		msg = _msg
-		
-		if (instance_exists(other)) origin_instance = other.id else origin_instance = noone
-		
+		if (instance_exists(other)) origin_instance = other.id
+		else origin_instance = noone
 		bg_index = _bg_index
-		
-		if (_opt_responses != undefined){
-			//trim markers
-			responses = _opt_responses
-			for (var _i = 0; _i < array_length(responses); _i++){
-				var _marker_pos = string_pos(":", responses[_i])
-				response_scripts[_i] = string_copy(responses[_i], 1, _marker_pos - 1)
-				response_scripts[_i] = real(response_scripts[_i])
-				
-				responses[_i] = string_delete(responses[_i], 1, _marker_pos)
-			}
-		}
-		else{
-			responses = [-1]
-			response_scripts = [-1]
-		}
 	}
 	
 	with (obj_player){
@@ -103,7 +83,7 @@ function dialogue_responses(_response){
 	switch (_response){
 		case 0: break //end conversation
 		case 1: new_textbox("you gave response a!", 0) break
-		case 2: new_textbox("you gave response b! any further response?", 0, ["3:Yes", "0:No"]) break
+		case 2: new_textbox("you gave response b! any further response?", 0) break
 		case 3: new_textbox("thanks for giving responses", 0) break
 		
 		default: show_error("dialogue_responses switch statement: something's gone wrong", false) break

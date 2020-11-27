@@ -10,17 +10,15 @@ create_light = function(_x, _y, _flicker){
 	x = _x
 	y = _y
 	flicker = _flicker
-	var _cx = camera_get_view_x(view_camera[0])
-	var _cy = camera_get_view_y(view_camera[0])
 		
 	surface_set_target(surf)
 	gpu_set_blendmode(bm_subtract)
 		
-	if (flicker) draw_sprite_ext(spr_light, 0, x - _cx, y - _cy, 1 + random(0.05), 1 + random(0.05), 0, c_white, 1)
-	else draw_sprite_ext(spr_light, 0, x - _cx, y - _cy, 1, 1, 0, c_white, 1)
+	if (flicker) draw_sprite_ext(spr_light, 0, x - CAM_X, y - CAM_Y, 1 + random(0.05), 1 + random(0.05), 0, c_white, 1)
+	else draw_sprite_ext(spr_light, 0, x - CAM_X, y - CAM_Y, 1, 1, 0, c_white, 1)
 		
 	gpu_set_blendmode(bm_add)
-	draw_sprite_ext(spr_light, 0, x - _cx, y - _cy, 1 + random(0.05), 1 + random(0.05), 0, c_yellow, 0.3)
+	draw_sprite_ext(spr_light, 0, x - CAM_X, y - CAM_Y, 1 + random(0.05), 1 + random(0.05), 0, c_yellow, 0.3)
 	
 	gpu_set_blendmode(bm_normal)
 	draw_set_alpha(1)

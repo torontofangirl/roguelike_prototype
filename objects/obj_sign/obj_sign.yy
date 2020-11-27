@@ -26,7 +26,7 @@
   "eventList": [],
   "properties": [],
   "overriddenProperties": [
-    {"propertyId":{"name":"entity_activate_script","path":"objects/par_entity/par_entity.yy",},"objectId":{"name":"par_entity","path":"objects/par_entity/par_entity.yy",},"value":"new_textbox","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
+    {"propertyId":{"name":"par_entity","path":"objects/par_entity/par_entity.yy",},"objectId":{"name":"par_entity","path":"objects/par_entity/par_entity.yy",},"value":"new_textbox","resourceVersion":"1.0","name":"","tags":[],"resourceType":"GMOverriddenProperty",},
   ],
   "parent": {
     "name": "entities",
