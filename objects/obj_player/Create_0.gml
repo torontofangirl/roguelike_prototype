@@ -162,7 +162,7 @@ state = new StateMachine("idle",
 	
 	//locked state
 	"locked", {
-		//so complicated	
+		//complicated ik
 	},
 	
 	"roll", {

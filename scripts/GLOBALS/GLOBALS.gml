@@ -55,7 +55,7 @@ function fourlimit_set_colors(colA, colB, colC, colD, random_) {
 
 
 ///@func new_textbox(message, opt_bg_index, [opt_responses])
-///@param {string} message			the message to display
+///@param {string} [message]		array of message to display
 ///@param {real} opt_bg_index		image_index of bg sprite
 ///@param {string} [opt_responses]	array of responses
 ///@returns N/A

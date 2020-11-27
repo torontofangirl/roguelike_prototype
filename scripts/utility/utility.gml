@@ -58,9 +58,9 @@ function draw_set_text(_colour, _font, _halign, _valign){
 }
 
 ///@func string_wrap(string, max_width)
-///@param {string}			string to be wrapped
-///@param {real}			string WIDTH (not length) to wrap after
-///@returns {string}		wrapped string
+///@param {string} string			string to be wrapped
+///@param {real} max_width			string WIDTH (not length) to wrap after
+///@returns {string}				wrapped string
 function string_wrap(_str, _max_width){
 	var _str_len = string_length(_str)
 	var _last_space = 1
@@ -75,7 +75,6 @@ function string_wrap(_str, _max_width){
 		if (string_width(_sub_str) > _max_width){
 			_str = string_delete(_str, _last_space, 1)
 			_str = string_insert("\n", _str, _last_space)
-			_count++ //insert \n increases 1 char (backslash ignored)
 		}
 		_count++
 	}

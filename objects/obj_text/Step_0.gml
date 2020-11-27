@@ -1,50 +1,36 @@
 lerp_progress += (1 - lerp_progress) / 50
-text_progress += text_speed
 
-response_selected += (obj_player.controls.select_up - obj_player.controls.select_down)
-
-//wrap responses
-var _max = array_length(responses) - 1
-var _min = 0
-if (response_selected > _max) response_selected = _min
-if (response_selected < _min) response_selected = _max
+if (text_progress < string_length(string_wrap(msg[page], text_max_width)) && !pause){
+	text_progress += text_speed
+	
+	switch (string_char_at(string_wrap(msg[page], text_max_width), text_progress)){
+		case ",": 
+			pause = true 
+			alarm[1] = 8
+			break
+		case ".":
+		case "?":
+		case "!": 
+			pause = true
+			alarm[1] = 15
+			break
+	}
+}
 
 x1 = lerp(x1, target_x1, lerp_progress)
 x2 = lerp(x2, target_x2, lerp_progress)
 
-msg = string_wrap(msg, text_max_width)
-
-if (obj_player.controls.interact){
-	var _message_length = string_length(msg)
-	
-	if (text_progress >= _message_length){
-		if (responses[0] != -1){
-			//call from origin instance so that we can do stuff to the instance
-			with (origin_instance) dialogue_responses(other.response_scripts[other.response_selected])
-		}
-		
-		instance_destroy()
-		if (instance_exists(obj_text_queued)){
-			with (obj_text_queued) ticket--	
-		}
-		else{
-			with (obj_player){
-				try{
-					state_switch(get_previous_state(id))
-				}
-				catch(_exception){
-					state_switch("idle")
-				}
-			}
-		}
+if (obj_player.controls.interact && alarm[0] < 0){
+	if (text_progress < string_length(string_wrap(msg[page], text_max_width)) && text_progress > 10){
+		text_progress = string_length(string_wrap(msg[page], text_max_width))	
 	}
 	
+	else if (page < array_length(msg) - 1){ //-1 since array_length([1, 2]) is 2
+		page++
+		text_progress = 0
+	}
 	else{
-		if (text_progress >= 10){ //allow skip
-			text_progress = _message_length
-		}
+		with (obj_player) state_switch(get_previous_state(id))
+		instance_destroy()
 	}
 }
-
-
-
