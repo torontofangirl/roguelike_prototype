@@ -57,8 +57,7 @@ function fourlimit_set_colors(colA, colB, colC, colD, random_) {
 ///@func new_textbox(message, opt_bg_index, [opt_responses])
 ///@param {string} [message]		array of message to display
 ///@param {real} opt_bg_index		image_index of bg sprite
-///@param {string} [opt_responses]	array of responses
-///@returns N/A
+///@returns {real} id of textbox	id of textbox created
 function new_textbox(_msg, _bg_index){
 	var _tbox = instance_create_layer(0, 0, "Managers", obj_text)
 	with (_tbox){
@@ -73,6 +72,7 @@ function new_textbox(_msg, _bg_index){
 			state_switch("locked")
 		}
 	}
+	return _tbox
 }
 
 ///@func dialogue_responses(response)
