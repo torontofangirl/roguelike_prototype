@@ -1,5 +1,6 @@
 {
   "resources": [
+    {"id":{"name":"GMLive","path":"scripts/GMLive/GMLive.yy",},"order":0,},
     {"id":{"name":"obj_text","path":"objects/obj_text/obj_text.yy",},"order":4,},
     {"id":{"name":"spr_player","path":"sprites/spr_player/spr_player.yy",},"order":0,},
     {"id":{"name":"fnt_textbox","path":"fonts/fnt_textbox/fnt_textbox.yy",},"order":0,},
@@ -13,9 +14,10 @@
     {"id":{"name":"spr_player_hurt","path":"sprites/spr_player_hurt/spr_player_hurt.yy",},"order":3,},
     {"id":{"name":"t_walls","path":"tilesets/t_walls/t_walls.yy",},"order":0,},
     {"id":{"name":"t_floor","path":"tilesets/t_floor/t_floor.yy",},"order":1,},
+    {"id":{"name":"obj_gmlive","path":"objects/obj_gmlive/obj_gmlive.yy",},"order":2,},
     {"id":{"name":"MACROS","path":"scripts/MACROS/MACROS.yy",},"order":0,},
     {"id":{"name":"spr_sign","path":"sprites/spr_sign/spr_sign.yy",},"order":0,},
-    {"id":{"name":"obj_player","path":"objects/obj_player/obj_player.yy",},"order":0,},
+    {"id":{"name":"par_player","path":"objects/par_player/par_player.yy",},"order":0,},
     {"id":{"name":"obj_level","path":"objects/obj_level/obj_level.yy",},"order":2,},
     {"id":{"name":"obj_floor","path":"objects/obj_floor/obj_floor.yy",},"order":3,},
     {"id":{"name":"obj_npc","path":"objects/obj_npc/obj_npc.yy",},"order":2,},
@@ -30,7 +32,9 @@
     {"id":{"name":"spr_floor","path":"sprites/spr_floor/spr_floor.yy",},"order":1,},
     {"id":{"name":"rm_parent","path":"rooms/rm_parent/rm_parent.yy",},"order":0,},
     {"id":{"name":"obj_sign","path":"objects/obj_sign/obj_sign.yy",},"order":1,},
+    {"id":{"name":"GMLiveAPI","path":"scripts/GMLiveAPI/GMLiveAPI.yy",},"order":1,},
     {"id":{"name":"rm_game","path":"rooms/rm_game/rm_game.yy",},"order":1,},
+    {"id":{"name":"obj_player_class_roll","path":"objects/obj_player_class_roll/obj_player_class_roll.yy",},"order":1,},
     {"id":{"name":"utility","path":"scripts/utility/utility.yy",},"order":2,},
     {"id":{"name":"TODO","path":"notes/TODO/TODO.yy",},"order":0,},
   ],
@@ -73,6 +77,7 @@
     {"folderPath":"folders/Objects/entities.yy","order":2,"resourceVersion":"1.0","name":"entities","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Sprites/player.yy","order":0,"resourceVersion":"1.0","name":"player","tags":[],"resourceType":"GMFolder",},
     {"folderPath":"folders/Objects/player.yy","order":0,"resourceVersion":"1.0","name":"player","tags":[],"resourceType":"GMFolder",},
+    {"folderPath":"folders/Extensions/GMLive.yy","order":1,"resourceVersion":"1.0","name":"GMLive","tags":[],"resourceType":"GMFolder",},
   ],
   "AudioGroups": [
     {"targets":461609314234257646,"resourceVersion":"1.0","name":"audiogroup_default","resourceType":"GMAudioGroup",},
@@ -80,7 +85,15 @@
   "TextureGroups": [
     {"isScaled":true,"autocrop":true,"border":2,"mipsToGenerate":0,"groupParent":null,"targets":461609314234257646,"resourceVersion":"1.0","name":"Default","resourceType":"GMTextureGroup",},
   ],
-  "IncludedFiles": [],
+  "IncludedFiles": [
+    {"CopyToMask":-1,"filePath":"datafiles/GMLive","resourceVersion":"1.0","name":"gmlive-server.n","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/GMLive","resourceVersion":"1.0","name":"std.ndll","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/GMLive","resourceVersion":"1.0","name":"gmlive-server.exe","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/GMLive","resourceVersion":"1.0","name":"gmlive.html","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/GMLive","resourceVersion":"1.0","name":"neko.dll","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/GMLive","resourceVersion":"1.0","name":"gcmt-dll.dll","resourceType":"GMIncludedFile",},
+    {"CopyToMask":-1,"filePath":"datafiles/GMLive","resourceVersion":"1.0","name":"regexp.ndll","resourceType":"GMIncludedFile",},
+  ],
   "MetaData": {
     "IDEVersion": "2.3.1.536",
   },

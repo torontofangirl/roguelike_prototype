@@ -1,15 +1,12 @@
-A roguelike set in space where you discover yourself in an abondoned spaceship. You need to figure out how the ship works and get it online again, all
-while being attacked by aliens. To power the ship back on, you must get to the control room by fighting waves of enemies.
-
 A roguelike set in space where you were delivered deep into space to die for your crimes. You must defeat enemies in order to find a spaceship
 rumoured to have been built centuries ago. Along the way, you'll receive help from spelunky-style shopkeepers.
 
-Once you find the spaceship, you realize that it has been overrun and downed by aliens. You must now fix the ship d
-
+Once you find the spaceship (checkpoint), you realize that it has been overrun and downed by aliens. You must now fix the ship by getting to the
+control room while also solving puzzles.
 
 If you die, you spawn on a brand-new planet 
 
-Nuclear Throne meets spelunky meets enter the gungeon
+Nuclear Throne meets spelunky meets enter the gungeon with idle mechanics
 
 Nuclear throne elements - Procedural generation, fully destructible terrain
 
@@ -27,11 +24,7 @@ CLASS ABILITIES:
 	(teleport a short distance after getting upgrade later)
 	
 --------------------------MVP--------------------------------
-MULTIPLE PAGES
-
-https://www.youtube.com/watch?v=Lxy8Q67HgD4
-
-shooting and rolling
+shooting
 
 destrutable terrain (BOMBS)
 special abilities (get the parenting system working)

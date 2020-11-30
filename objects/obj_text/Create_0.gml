@@ -2,8 +2,6 @@
 msg = ["No message"]
 bg_index = 0
 
-draw_set_text(c_black, fnt_textbox, fa_center, fa_top)
-
 box_buffer_from_top = 140
 text_buffer_from_top = 16
 text_max_width = CAM_W - 30
